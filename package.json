@@ -1,0 +1,21 @@
+{
+  "name": "tensorflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tensorflow/tfjs": "^3.19.0",
+    "@tensorflow/tfjs-vis": "^1.5.1"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "eslint": "^8.21.0",
+    "eslint-config-google": "^0.14.0",
+    "process": "^0.11.10"
+  }
+}
