@@ -1,7 +1,7 @@
 import * as tf from '@tensorflow/tfjs';
 import * as tfvis from '@tensorflow/tfjs-vis';
 
-window.onload = () => {
+window.onload = async () => {
   const xs = [1, 2, 3, 4];
   const ys = [1, 3, 5, 7];
 
@@ -13,4 +13,21 @@ window.onload = () => {
 
   const model = tf.sequential();
   model.add(tf.layers.dense({units: 1, inputShape: [1]}));
+  // 设置损失函数（均方误差）
+  model.compile({
+    loss: tf.losses.meanSquaredError,
+    optimizer: tf.train.sgd(0.1),
+  });
+
+  const inputs = tf.tensor(xs);
+  const labels = tf.tensor(ys);
+  // 异步——等待学习
+  await model.fit(inputs, labels, {
+    batchSize: 4,
+    epochs: 100,
+    callbacks: tfvis.show.fitCallbacks({name: '训练过程'}, ['loss']),
+  });
+
+  const output = model.predict(tf.tensor([5]));
+  alert(`如果 x 为 5，那么预测 y 为${output.dataSync()[0]}`);
 };
